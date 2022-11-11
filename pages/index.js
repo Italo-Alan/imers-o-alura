@@ -40,8 +40,6 @@ const StyleHeader = styled.div`
         text-align: center;
     }
 
-    background-color: ${({theme}) => theme.backgroundLevel1};
-
     .banner{
         position: absolute;
         width: 100%;
@@ -68,7 +66,6 @@ const StyleHeader = styled.div`
 
     p, h1{
         font-family: 'Helvetica';
-
     }
 `
     const Banner = styled.div `

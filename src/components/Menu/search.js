@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 
 const StyledSearch = styled.div`
   display: flex;
@@ -32,7 +32,7 @@ const StyledSearch = styled.div`
       height: 40px;
     }
   }
-`;
+`
 
 
 export default function Search({valorDoFiltro, setValorDoFiltro}) {
