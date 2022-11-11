@@ -1,7 +1,6 @@
 import React from "react";
 import config from "../config.json";
 import styled from "styled-components";
-import {CSSReset} from "../src/components/CSSReset.js";
 import Menu from "../src/components/Menu";
 import {StyledTimeline} from "../src/components/Timeline.js";
 
@@ -13,7 +12,6 @@ function HomePage(){
 
     return (
         <> 
-            <CSSReset/> 
             <div style={homePageStyle}>
                 <Menu valorDoFiltro={valorDoFiltro} setValorDoFiltro={setValorDoFiltro}/>
                 <Header></Header>
@@ -27,12 +25,22 @@ function HomePage(){
 
 export default HomePage
 
+const StyleFavorites = styled.div`
+    img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    }
+`
+
 const StyleHeader = styled.div`
     div{
         display: flex;
         flex-direction: column;
         text-align: center;
     }
+
+    background-color: ${({theme}) => theme.backgroundLevel1};
 
     .banner{
         position: absolute;
@@ -58,21 +66,9 @@ const StyleHeader = styled.div`
         border-radius: 50%;
     }
 
-    h1{
+    p, h1{
         font-family: 'Helvetica';
-        font-weight: 700;
-        font-size: 24px;
-        line-height: 28px;
-        color: #000000;
-    }
 
-    p{
-        font-family: 'Helvetica';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 18px;
-        color: #666666;
     }
 `
     const Banner = styled.div `
@@ -99,6 +95,7 @@ function Header(){
 
 function TimeLine({searchValue, ...props}){
     const playlistNames = Object.keys(props.playlist);
+    
     return(
         <StyledTimeline>
             {playlistNames.map((playlistName) => {
@@ -120,10 +117,16 @@ function TimeLine({searchValue, ...props}){
                                             {video.title}
                                         </span>
                                     </a>
-                            )
-                })};
+                                )
+                        })}
                         </div>
                     </section>
+                    // <section class="Favoritos">
+                    //     <img src={} />
+                    //      <p> 
+                    //          {video.title}
+                    //      </p>
+                    // </section>
                 )
             })}
         </StyledTimeline>
