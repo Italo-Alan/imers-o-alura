@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }) {
         //Estrutura global que serve para amarrar a aplicação
         <ThemeProvider theme={theme[contexto.mode]}>
             <CSSReset />
-            <Component{...pageProps}/>;
+            <Component{...pageProps}/>
             <RegisterVideo /> 
         </ThemeProvider>      
     )

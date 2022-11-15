@@ -3,19 +3,43 @@ import config from "../config.json";
 import styled from "styled-components";
 import Menu from "../src/components/Menu";
 import {StyledTimeline} from "../src/components/Timeline.js";
+import { videoService } from "../src/services/videoService";
+
 
 function HomePage(){
-    const homePageStyle = {};
 
+    const homePageStyle = {};
+    const service = videoService();
     const [valorDoFiltro, setValorDoFiltro] = React.useState("");
-    // const valorDoFiltro = "Frost";
+    const [playlists, setPlaylists] = React.useState({});     // config.playlists
+
+    React.useEffect(() => {
+        console.log("useEffect");
+        service
+            .getAllVideos()
+            .then((dados) => {
+                console.log(dados.data);
+                // Forma imutavel
+                const novasPlaylists = {};
+                dados.data.forEach((video) => {
+                    if (!novasPlaylists[video.playlist]) novasPlaylists[video.playlist] = [];
+                    novasPlaylists[video.playlist] = [
+                        video,
+                        ...novasPlaylists[video.playlist],
+                    ];
+                });
+
+                setPlaylists(novasPlaylists);
+            });
+    }, []);
+
 
     return (
         <> 
             <div style={homePageStyle}>
                 <Menu valorDoFiltro={valorDoFiltro} setValorDoFiltro={setValorDoFiltro}/>
                 <Header></Header>
-                <TimeLine searchValue={valorDoFiltro} playlist={config.playlist}>
+                <TimeLine searchValue={valorDoFiltro} playlist={playlists}>
 
                 </TimeLine>
             </div>        
@@ -118,12 +142,7 @@ function TimeLine({searchValue, ...props}){
                         })}
                         </div>
                     </section>
-                    // <section class="Favoritos">
-                    //     <img src={} />
-                    //      <p> 
-                    //          {video.title}
-                    //      </p>
-                    // </section>
+
                 )
             })}
         </StyledTimeline>
